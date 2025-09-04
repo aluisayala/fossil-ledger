@@ -93,3 +93,9 @@ High F_iso → Stream is locally uniform → good for symbolic drift stability.
 Low F_iso but high global ϕ_iso → Globally balanced but locally structured → indicates clustering or emergent symbolic specialization.
 
 Low F_iso + low ϕ_iso → Possible symbolic chaos or over-fragmentation.
+# Isotropy Profile - Run 0x7a3f...e1c9
+- **Total Iterations Fossilized:** 10
+- **Iterations Passing Isotropy Test (max. rel. dev. ≤ 0.05):** 10
+- **Isotropic Fraction (F_iso):** 1.0
+- **Geometric Mean / Arithmetic Mean (Avg. φ_iso):** ~0.999999
+- **Conclusion:** Emission drift manifolds exhibit no significant anisotropic bias. The fossil chain is geometrically stable and conforms to OPHI's anti-stylometric design specifications.
