@@ -1,0 +1,95 @@
+The isotropic fraction F_iso in the OPHI framework is basically a coherence score for emissions — a measure of how uniform or “directionless” the symbolic emission field is after whitening and de-biasing.
+
+Here’s the breakdown:
+
+1. What It Measures
+
+It tells you what portion of your emissions are “locally isotropic.”
+
+Locally isotropic means: the spread of eigenvalues around the mean is tight, i.e., no single direction dominates.
+
+In OPHI, this matters because symbolic emissions need balanced variance for reliable generalization.
+
+2. Core Formula
+
+An emission passes the isotropy gate if:
+
+max
+⁡
+𝑗
+∣
+𝜆
+𝑗
+−
+𝜆
+ˉ
+∣
+𝜆
+ˉ
+≤
+𝜀
+j
+max
+	​
+
+λ
+ˉ
+∣λ
+j
+	​
+
+−
+λ
+ˉ
+∣
+	​
+
+≤ε
+
+Where:
+
+λᵢ = eigenvalues of the local covariance matrix of the emission (after whitening + de-biasing)
+
+λ̄ = mean eigenvalue
+
+ε = tolerance (e.g. 0.05)
+
+Then:
+
+𝐹
+iso
+=
+#
+{
+emissions passing isotropy test
+}
+#
+{
+total emissions meeting OPHI gate
+}
+F
+iso
+	​
+
+=
+#{total emissions meeting OPHI gate}
+#{emissions passing isotropy test}
+	​
+
+3. The OPHI Gate
+
+Only emissions that already meet:
+
+Coherence (C) ≥ 0.985
+
+Entropy (S) ≤ 0.01
+
+…are eligible. Anything noisy or unstable is excluded upfront.
+
+4. Interpretation
+
+High F_iso → Stream is locally uniform → good for symbolic drift stability.
+
+Low F_iso but high global ϕ_iso → Globally balanced but locally structured → indicates clustering or emergent symbolic specialization.
+
+Low F_iso + low ϕ_iso → Possible symbolic chaos or over-fragmentation.
