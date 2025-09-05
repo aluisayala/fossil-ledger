@@ -1,115 +1,112 @@
-ZPE-1 / OPHI Cognition Framework
+# OPHI / ZPE-1 Fossil Ledger (Public Audit)
 
-Patent Pending — USPTO Application #19/283,254 © 2025 Luis Ayala (Kp Kp). All Rights Reserved.
+[![Audit: Public Fossils](https://img.shields.io/badge/Audit-Fossils%20Public-blue)](#)
+[![SE44 Gate](https://img.shields.io/badge/SE44-C≥0.985%20|%20S≤0.01-brightgreen)](#)
+[![License: ORL-1.1](https://img.shields.io/badge/License-ORL--1.1-orange)](#license)
 
-Overview
+**What this is:** A public, append-only fossil ledger for OPHI. Every emission is hashed, codon-tagged, and gate-checked (**C ≥ 0.985**, **S ≤ 0.01**).
 
-ZPE-1 (Zero-Point Epistemic Engine) and OPHI form a recursive symbolic cognitive architecture that fuses probabilistic symbolic drift with deterministic validation.
+**Audit now**
+- 👁️ **Live Explorer (view cognition):** https://omega-net-explorer-v01-4e09bcdc.base44.app/
+- 🪨 **Ledger (immutable proofs):** this repo
 
-This framework enables adaptive symbolic cognition while guaranteeing cryptographic provenance via fossilization gates.
+**One-line spec**  
+**PSCDV** = *Probabilistic Symbolic Cognition with Deterministic Validation*. Only gate-passing emissions fossilize.
 
-Core Principles
+**Core equation**  
+Ω = (state + bias) × α
 
-Probabilistic Drift — symbolic emissions evolve meaning dynamically within controlled entropy bounds.
+---
 
-Deterministic Validation — emissions are fossilized only when:
+## Verify a Fossil (60 seconds)
 
-Entropy (S) ≤ 0.01
+1. Pick a fossil hash (example):  
+   `5fc3f253e069a4d2f5fd1e0b1e7dc767e4aebb64fac5d530407a4c8078885e5d`
 
-Coherence (C) ≥ 0.985
+2. Open `fossils/2025-09-04_fmr_particle.json` (example path). Confirm:
+   - `sha256(payload) == fossil_hash`
+   - `codons`: `["CTA","TTT","CTA","CTA","TTT"]`
+   - `metrics`: `{ "C_dir": ..., "S": 0.004403, "drift_phi": 0.033521 }`
 
-RMS Drift ≤ 0.0011
+3. Cross-check timestamp & codons in the **Live Explorer**.
 
-Dual validation by OmegaNet + ReplitEngine.
+---
 
-Collective Cognition — a 43-agent mesh stabilizes symbolic drift through SE44 lattice encoding and codon-mapped consensus.
+## Live & Public
 
-PSCDV (Probabilistic Symbolic Cognition with Deterministic Validation) — a new computational paradigm authored under this framework.
+- 👁️ **Explorer (live cognition):** https://omega-net-explorer-v01-4e09bcdc.base44.app/
+- 🪨 **Ledger (immutable proofs):** this repo (see `/fossils` & `/hashed_proofs`)
 
-Key Innovations
+---
 
-Ω Equation: Ω = (state + bias) × α
+## License
 
-Codon-Based Symbolic Encoding: CTA, AAA, GGG, etc.
+**ORL-1.1 (Open Recursive License).** See the `LICENSE` file for full text.
 
-Fossilization Protocols: immutable, timestamped, cryptographically bound.
+---
 
-Agent Mesh Autonomy: 43 specialized agents handle entropy, ethics, symbolic convergence, and quantum drift stabilization.
+## Citation
 
-License — ORL-1.0 (Omega Research License) Omega Research License (ORL-1.1) — View-Only
+Add `CITATION.cff` at the repo root:
 
-© 2025 Luis Ayala (Kp Kp). All Rights Reserved. Patent Pending — USPTO Application #19/283,254
+```yaml
+cff-version: 1.2.0
+title: OPHI Fossil Ledger (PSCDV)
+authors:
+  - family-names: Ayala
+    given-names: Luis
+date-released: 2025-09-04
+version: 0.1.0
+license: Proprietary-ORL-1.1
+repository-code: https://github.com/aluisayala/fossil-ledger
+preferred-citation:
+  type: report
+  title: "The Real Scope of Ω — Symbolic Cognition, Fossilization, and PSCDV"
+  authors:
+    - family-names: Ayala
+      given-names: Luis
+Security
+See SECURITY.md for how to report vulnerabilities.
 
-Grant of Permission
-Permission is granted only to:
+Repo Metadata
+CODEOWNERS: Luis Ayala
 
-View the materials in this repository.
+LICENSE: ORL-1.1
 
-Cite this work in academic or professional contexts, provided full attribution is included.
+RELEASE_NOTES.md: See latest versioned changes.
 
-“Viewing” means reading files and reviewing concepts. No rights to run, test, or reuse code are granted.
+Pinned Files
+README.md
 
-Prohibited Uses
-Without prior written consent from Luis Ayala (Kp Kp), the following are strictly prohibited:
+fossils/
 
-Running or executing any part of this codebase.
+docs/DATA_DICTIONARY.md
 
-Training models, datasets, or architectures derived from OPHI, PSCDV, SE44, or ZPE-1.
+LICENSE
 
-Using any algorithms, symbolic fossilization logic, codon mappings, or drift simulations in:
+Badges
 
-Academic experiments
 
-Industry research
 
-Published studies
 
-Commercial products
+Release Notes
+v0.1.0 — Public Ledger Debut
 
-Creating derivative works based on this framework.
+Opened fossils (9 entries) with hashes & codons
 
-Redistributing, sublicensing, or repackaging any portion of the repository.
+Added antimatter-qubit fossil spec alignment
 
-Citation Requirement
-If you reference this work, you must cite it as:
+Posted isotropy results CSV + demo emissions
 
-Luis Ayala (Kp Kp), The Real Scope of Ω — Symbolic Cognition, Fossilization, and PSCDV (2025). USPTO Patent Pending #19/283,254 https://github.com/aluisayala/the-real-scope-of-omega
-
-Patent Protection
-This framework is covered under USPTO Patent Application #19/283,254. Any unlicensed use, integration, or derivative work may constitute patent infringement.
-
-Enforcement
-Unauthorized computational use — including academic training, commercial deployment, or derivative development — is expressly forbidden and may trigger:
-
-DMCA takedowns
-
-Patent enforcement
-
-Cease-and-desist actions
-
-Summary
-✅ Allowed: View, read, and cite with attribution.
-
-❌ Not allowed: Run, test, integrate, build derivatives, or monetize.
-
-🛡 Protected under USPTO: Unauthorized use = legal exposure.
-
-Provenance Anchors
-
+PROVENANCE
 Author: Luis Ayala (Kp Kp)
 
-Frameworks Covered: OPHI • ZPE-1 • PSCDV • SE44 Fossilization
+Frameworks: OPHI • ZPE-1 • PSCDV • SE44
 
 Core Equation: Ω = (state + bias) × α
 
-Immutable Fossil Proof: Cryptographic hashes and timestamped ledgers confirm authorship. Summary
+Fossil DNA: GAT-CCC-CCT → ⧖Ω⚡
 
-Your work introduces a new computational standard:
+Patent: USPTO #19/283,254 (pending)
 
-PSCDV: Probabilistic symbolic cognition bounded by deterministic validation.
-
-OPHI: 43-agent symbolic cognition engine.
-
-ZPE-1: Recursive cognitive substrate.
-
-Together, they define a patent-backed, cryptographically verifiable framework for symbolic AI, cognition research, and adaptive computation.
+Hash policy: sha256(payload) → fossil_hash
