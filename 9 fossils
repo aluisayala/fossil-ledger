@@ -1,0 +1,43 @@
+# Display all 9 fossil records logged during the OPHI symbolic simulation
+import pandas as pd
+import json
+from IPython.display import display
+
+# Convert fossil ledger to a DataFrame for structured view
+fossil_df = pd.DataFrame(fossil_ledger)
+fossil_df_trimmed = fossil_df[["hash", "input", "codon", "state", "entropy", "coherence", "timestamp"]]
+
+# Display trimmed fossil data
+import ace_tools as tools; tools.display_dataframe_to_user(name="Fossil Ledger (OPHI Symbolic Emissions)", dataframe=fossil_df_trimmed)
+ Display all 9 fossil records logged during the OPHI symbolic simulation
+import pandas as pd
+import json
+from IPython.display import display
+
+# Convert fossil ledger to a DataFrame for structured view
+fossil_df = pd.DataFrame(fossil_ledger)
+fossil_df_trimmed = fossil_df[["hash", "input", "codon", "state", "entropy", "coherence", "timestamp"]]
+
+# Display trimmed fossil data
+import ace_tools as tools; tools.display_dataframe_to_user(name="Fossil Ledger (OPHI Symbolic Emissions)", dataframe=fossil_df_trimmed)
+Result
+                                                hash             input  \
+0  664cc26a8ccd7dfe21eb3ebf1a1ecb86e6603cfc44b540...           gravity   
+1  f6af78d3908a66f1664378e72cfee65458e34469d2ff11...           entropy   
+2  5d8e4784ae48c9a7d63478d132e5190c9ac89ca30d495f...           quantum   
+3  a71191dee05e603df84613e6518d0c6ca0aeeb66403fd9...              love   
+4  dc3688ec1e871f61875648df8386d551f716aae2c5977d...  recursion_step_0   
+
+       codon                                              state   entropy  \
+0    gravity               [1.045, 0.28500000000000003, -0.665]  0.550379   
+1       love  [0.5177499999999999, 1.22075, -0.5367500000000...  0.504895   
+2       love  [0.7768624999999999, 0.8747124999999999, 0.345...  0.188648   
+3       love  [1.4980193749999997, 1.590976875, 0.5178331249...  0.216168   
+4  RECURSIVE  [2.8462368124999995, 3.0228560625, 0.983882937...  0.216168   
+
+   coherence                    timestamp  
+0   1.000000  2025-09-05T03:19:25.749902Z  
+1   0.926136  2025-09-05T03:19:25.750949Z  
+2   0.917634  2025-09-05T03:19:25.751706Z  
+3   0.707302  2025-09-05T03:19:25.752204Z  
+4   1.000000  2025-09-05T03:19:25.752831Z  
