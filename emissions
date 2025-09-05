@@ -1,0 +1,20 @@
+{
+"emission\_id": "fmr\_particle\_core\_001",
+"timestamp\_utc": "2025-09-04T14:12:11Z",
+"omega\_result": 3.46496,
+"drift\_phi": 0.033521,
+"entropy\_S": 0.004403,
+"coherence\_C": 0.9997,
+"codons": \["CTA", "TTT", "CTA", "CTA", "TTT"],
+"hash\_algorithm": "sha256",
+"fossil\_hash": "8d5694f803efa2022f825e3b7642896bb043f0624f1113bc6371c1880b984e1d",
+"provenance": {
+"engine": "OPHI ZPE-1",
+"validators": \["OmegaNet", "ReplitEngine"],
+"gates": {
+"C\_min": 0.985,
+"S\_max": 0.01,
+"rms\_drift\_max": 0.0011
+}
+}
+}
