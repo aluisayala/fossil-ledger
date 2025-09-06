@@ -1,0 +1,70 @@
+# Auto-verify every fossil on push
+name: Verify Fossils
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Check fossil hashes
+        run: |
+          python - <<'PY'
+          import json, hashlib, pathlib, sys
+
+          def canon(obj):
+              return json.dumps(obj, sort_keys=True, separators=(",", ":")).encode()
+
+          errors = 0
+
+          # Verify hashed_proofs (dual-hash style: H_content + H_fossil)
+          hp_dir = pathlib.Path("hashed_proofs")
+          if hp_dir.exists():
+              for p in hp_dir.glob("*.json"):
+                  data = json.loads(p.read_text())
+
+                  # H_content = hash of emission, inputs, outputs, gates, codons
+                  required = ["emission","inputs","outputs","gates","codons"]
+                  try:
+                      content_obj = {k: data[k] for k in required}
+                  except KeyError as e:
+                      print(f"[MISSING FIELD] {p}: {e}")
+                      errors += 1
+                  else:
+                      h_content = hashlib.sha256(canon(content_obj)).hexdigest()
+                      if data.get("hashes",{}).get("H_content") != h_content:
+                          print(f"[H_content MISMATCH] {p} -> {h_content}")
+                          errors += 1
+
+                  # H_fossil = hash of the full JSON object (provenance-bound)
+                  h_fossil = hashlib.sha256(canon(data)).hexdigest()
+                  if data.get("hashes",{}).get("H_fossil") != h_fossil:
+                      print(f"[H_fossil MISMATCH] {p} -> {h_fossil}")
+                      errors += 1
+
+          # Verify legacy fossils: fossil_hash == sha256(record_without_fossil_hash)
+          fos_dir = pathlib.Path("fossils")
+          if fos_dir.exists():
+              for p in fos_dir.glob("*.json"):
+                  data = json.loads(p.read_text())
+                  if "fossil_hash" in data:
+                      rec = {k: v for k, v in data.items() if k != "fossil_hash"}
+                      h = hashlib.sha256(canon(rec)).hexdigest()
+                      if h != data["fossil_hash"]:
+                          print(f"[fossil_hash MISMATCH] {p} -> {h}")
+                          errors += 1
+
+          if errors:
+              print(f"FAILED with {errors} mismatches.")
+              sys.exit(1)
+          else:
+              print("All fossils verified ✅")
+          PY
