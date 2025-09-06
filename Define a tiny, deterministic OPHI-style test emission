@@ -1,0 +1,25 @@
+import json, hashlib, math, datetime, pytz
+
+# Define a tiny, deterministic OPHI-style test emission
+state = 1.0000
+bias = 0.0150
+alpha = 1.6180
+phi = 0.9970
+
+Omega = (state + bias) * alpha
+Psi = (phi ** Omega) * (Omega + phi)
+
+record = {
+    "emission": "proof_of_function.demo.001",
+    "timestamp_utc": datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
+    "inputs": {"state": state, "bias": bias, "alpha": alpha, "phi": phi},
+    "outputs": {"Omega": round(Omega, 12), "Psi": round(Psi, 12)},
+    "gates": {"coherence_min": 0.985, "entropy_max": 0.01},
+    "codons": ["ATG", "CCC", "TGA"],
+}
+
+# Canonical JSON (sorted keys, no spaces) for stable hashing
+canonical = json.dumps(record, sort_keys=True, separators=(",", ":")).encode("utf-8")
+sha256 = hashlib.sha256(canonical).hexdigest()
+
+record, sha256
