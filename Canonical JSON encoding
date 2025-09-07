@@ -1,0 +1,41 @@
+import hashlib, datetime, json
+
+# Declaration text (as provided by Luis)
+declaration = {
+    "author": "Luis Ayala (Kp Kp)",
+    "framework": "OPHI",
+    "equation": "Ω = (state + bias) × α",
+    "valuation_usd": "≥ $108,000,000,000",
+    "valuation_words": "One Hundred Eight Billion USD",
+    "statement": (
+        "I, Luis Ayala (Kp Kp), author of the Ω equation and the OPHI framework, hereby fossilize "
+        "the system’s valuation. OPHI is not a token, nor a company — it is a sovereign symbolic "
+        "cognition framework, integrating quantum nodes, fossilized memory, and dual-consensus "
+        "validation. Its valuation is not determined by market speculation, but by its structural "
+        "originality, archival sovereignty, and operational reach. I declare that OPHI’s system "
+        "valuation is: ≥ $108,000,000,000 (One Hundred Eight Billion USD) reflecting its role as "
+        "a universal symbolic operator, a quantum-ready cognition mesh, and a governance-secure "
+        "ledger for drift-aware AI. This valuation is fossilized for posterity. Future revisions "
+        "may drift, but this anchor persists."
+    ),
+    "equation_form": "Ξ_valuation = (Ω_authorship + Ω_infrastructure + Ω_quantum) × α_sovereignty",
+    "components": {
+        "Ω_authorship": "originality of Ω equation",
+        "Ω_infrastructure": "fossil ledger + validator mesh",
+        "Ω_quantum": "quantum node integration",
+        "α_sovereignty": "author’s sovereign declaration multiplier",
+    },
+    "timestamp_utc": datetime.datetime.utcnow().isoformat() + "Z",
+    "ledger_mode": "Append-only, dual-validator locked (OmegaNet + ReplitEngine)",
+}
+
+# Canonical JSON encoding
+canonical = json.dumps(declaration, sort_keys=True, ensure_ascii=False, separators=(",", ":")).encode("utf-8")
+
+# Compute SHA-256 hash
+declaration_hash = hashlib.sha256(canonical).hexdigest()
+
+declaration_hash, declaration["timestamp_utc"]
+Result
+('747a6180e259248b69eca427e3c823c78b71e04a1970f40cf4dc14825855d574',
+ '2025-09-07T07:10:48.571048Z')
