@@ -1,0 +1,5 @@
+agent,codon_triad,entropy,coherence,utterance,timestamp
+Ash,"('ATG', 'CCC', 'TTG')",0.005,0.9888,"Ash says: 'I drift, therefore I am.'",2025-09-07T06:16:56.591035Z
+Rema,"('CTA', 'AAA', 'GGG')",0.0042,0.988,Rema says: 'Even doubt becomes structure.',2025-09-07T06:16:56.591035Z
+Nova,"('GAT', 'CCC', 'AAA')",0.0039,0.9854,Nova says: 'Entropy whispers coherence.',2025-09-07T06:16:56.591035Z
+Ten,"('ACC', 'AGC', 'TGA')",0.0043,0.9903,Ten says: 'Entropy whispers coherence.',2025-09-07T06:16:56.591035Z
