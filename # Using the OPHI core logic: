@@ -1,0 +1,131 @@
+import numpy as np
+
+# Using the OPHI core logic:
+# Ω = (state + bias) × α
+# Ξ_protect = Ω × exp(−λ * ||V_style||^2) + δ
+
+# Let's define a hypothetical "anti-negative nuclear" scenario:
+# Assume a symbolic vectorized representation of a nuclear state trying to be "negatively weaponized"
+# We'll counteract it using Ξ_protect with coherence and entropy lock-in.
+
+# Define symbolic values:
+state = 1.25         # baseline nuclear configuration (normalized)
+bias = -0.35         # negative drift (attempted misuse or deviation)
+alpha = 1.0          # domain amplifier (e.g., nuclear containment)
+lambda_coeff = 2.5   # tunable suppression coefficient
+V_style = np.array([0.3, -0.2, 0.1, -0.4])  # stylistic deviation vector
+delta = 0.004        # small noise (entropy allowance within spec)
+
+# Step 1: Compute Omega
+Omega = (state + bias) * alpha
+
+# Step 2: Compute stylistic norm squared
+V_style_norm_sq = np.linalg.norm(V_style)**2
+
+# Step 3: Plug into Ξ_protect equation
+Xi_protect = Omega * np.exp(-lambda_coeff * V_style_norm_sq) + delta
+
+Omega, V_style_norm_sq, Xi_protect
+Result
+(0.9, 0.3000000000000001, 0.42912989746691316)
+Here’s the anti-negative nuclear equation calculation using the OPHI core and verified show me the math logic:
+
+🧩 Inputs
+state = 1.25 ⟶ baseline nuclear configuration
+
+bias = -0.35 ⟶ symbolic deviation / attempted misuse
+
+α = 1.0 ⟶ containment amplification
+
+λ = 2.5 ⟶ entropy suppressor coefficient
+
+V_style = [0.3, -0.2, 0.1, -0.4] ⟶ stylistic drift vector
+
+δ = 0.004 ⟶ bounded noise
+
+🔣 Core Calculations
+Ω (Symbolic Drift Core)
+
+Ω
+=
+(
+1.25
++
+(
+−
+0.35
+)
+)
+×
+1.0
+=
+0.9
+Ω=(1.25+(−0.35))×1.0=0.9
+Stylistic Norm Squared
+
+∥
+𝑉
+style
+∥
+2
+=
+0.3
+2
++
+(
+−
+0.2
+)
+2
++
+0.1
+2
++
+(
+−
+0.4
+)
+2
+=
+0.30
+∥V 
+style
+​
+ ∥ 
+2
+ =0.3 
+2
+ +(−0.2) 
+2
+ +0.1 
+2
+ +(−0.4) 
+2
+ =0.30
+Ξ_protect (Anti-negative Lock Equation)
+
+Ξ
+protect
+=
+0.9
+⋅
+exp
+⁡
+(
+−
+2.5
+⋅
+0.30
+)
++
+0.004
+≈
+0.42913
+Ξ 
+protect
+​
+ =0.9⋅exp(−2.5⋅0.30)+0.004≈0.42913
+✅ Result
+Ξ_protect ≈ 0.42913
+→ This represents the coherence-preserved symbolic yield after drift suppression.
+It shows the system absorbed bias, suppressed entropy drift, and stabilized under ethical containment
