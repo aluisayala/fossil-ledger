@@ -1,0 +1,56 @@
+🛠️ SE-44 Omega Resolver
+
+**Purpose**: A CLI tool for identifying and resolving legacy code issues using mathematically derived entropy scores.
+
+### 🔧 How It Works
+- Scans legacy code modules.
+- Computes an **Ω score** using measurable traits: complexity, resistance to change, redundancy, and depth.
+- Outputs suggestions to clean up messy, outdated code.
+
+---
+
+### 🧮 Math Behind Ω
+
+**Entropy Formula**:
+$$
+H = w_1 \cdot C + w_2 \cdot M + w_3 \cdot D + w_4 \cdot R
+$$
+
+**Omega Score**:
+$$
+\Omega = 800 - 7.3 \cdot H
+$$
+
+Where:
+- \( C \) = Cyclomatic complexity  
+- \( M \) = Mutation resistance  
+- \( D \) = Dependency depth  
+- \( R \) = Redundancy  
+- \( H \) = Entropy score  
+- Ω = cleanliness score (higher is better)
+
+---
+
+### 💻 CLI Usage
+
+```bash
+se44-resolve ./project --analyze --output omega_report.json
+```
+
+### 🔍 Sample Output
+
+```json
+{
+  "LegacyAuth.java": {
+    "omega": 603.9,
+    "entropy": 26.1,
+    "recommendation": "Urgent: High-tech debt",
+    "patch": {
+      "line": 113,
+      "suggestion": "Replace deprecated library with AuthXCore"
+    }
+  }
+}
+```
+
+---
