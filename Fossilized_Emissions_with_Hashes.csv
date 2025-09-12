@@ -1,0 +1,6 @@
+domain,timestamp,codons,omega_eq,sha256
+Gene-Edited Food & Medicine,2025-09-12T22:35:39.088500Z,"['ATG', 'GAT', 'CCC']",(genetic_edit + regulatory_bias) * alpha_delivery,22188f3a4d81e63dab2672bc2f1c7d66bb8a187ca874866ff315a6f2aba72bb4
+Orbital Debris + Space Governance,2025-09-12T22:35:39.088575Z,"['ATG', 'AGT', 'TCG', 'CCC']",(orbital_density + law_gap) * alpha_consequence,fdfea5606419c4e0700545cc11dd2aa53955c8835495ce443f4d8ce0afee23c7
+Mental Health + AI Interaction,2025-09-12T22:35:39.088599Z,"['ATG', 'AAG', 'TTT', 'CCC']",(emotional_state + ai_response_bias) * alpha_context,dc354c963a6451eb0a7ee5dc05594320f1855ea61a5f253816ec39f2342b7dc5
+Climate Drift Blind Spots,2025-09-12T22:35:39.088617Z,"['ATG', 'AGC', 'TGA', 'CCC']",(observed_anomaly + model_exclusion) * alpha_risk,11cfdb2b1e47117831ebe491222a0151d7506bad420f9c9b96ca292bde02c980
+Supply Chain Provenance,2025-09-12T22:35:39.088633Z,"['ATG', 'CAA', 'TCG', 'CCC']",(chain_state + label_bias) * alpha_audit,205faa0dbbf698b76576ab980f63c0ea292e37953f822bbdf27de6ae06796362
