@@ -1,0 +1,122 @@
+[
+  {
+    "iteration": 1,
+    "fossil_tag": "REBOOT_START_001",
+    "codon_triad": [
+      "ATG",
+      "CCC",
+      "TTG"
+    ],
+    "anchor": {
+      "repo": "ZPE-1 Symbolic Drift",
+      "author": "Luis Ayala (Kp Kp)",
+      "file_anchor": "REPO ANCHOR.txt"
+    },
+    "operator": "Ω = (state + bias) × α",
+    "state": {
+      "cycle": 1,
+      "mode": "bootstrap"
+    },
+    "bias": "drift_offset_0",
+    "alpha": 1.0,
+    "timestamp_utc": "2025-09-17T22:42:37.280750Z",
+    "prev_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+    "entry_hash": "d6b592ecb4d12b8b16493d8c8e67bcd4a07406c5e5d54c3b3f04ffcf24b08619"
+  },
+  {
+    "iteration": 2,
+    "fossil_tag": "REBOOT_START_002",
+    "codon_triad": [
+      "ATG",
+      "CCC",
+      "TTG"
+    ],
+    "anchor": {
+      "repo": "ZPE-1 Symbolic Drift",
+      "author": "Luis Ayala (Kp Kp)",
+      "file_anchor": "REPO ANCHOR.txt"
+    },
+    "operator": "Ω = (state + bias) × α",
+    "state": {
+      "cycle": 2,
+      "mode": "bootstrap"
+    },
+    "bias": "drift_offset_1",
+    "alpha": 1.01,
+    "timestamp_utc": "2025-09-17T22:42:37.281132Z",
+    "prev_hash": "d6b592ecb4d12b8b16493d8c8e67bcd4a07406c5e5d54c3b3f04ffcf24b08619",
+    "entry_hash": "31d3cbb9ee79d61378d3544f6b9d9bfccfbbdda0bc2c305ad8a0f71451ac8ca9"
+  },
+  {
+    "iteration": 3,
+    "fossil_tag": "REBOOT_START_003",
+    "codon_triad": [
+      "ATG",
+      "CCC",
+      "TTG"
+    ],
+    "anchor": {
+      "repo": "ZPE-1 Symbolic Drift",
+      "author": "Luis Ayala (Kp Kp)",
+      "file_anchor": "REPO ANCHOR.txt"
+    },
+    "operator": "Ω = (state + bias) × α",
+    "state": {
+      "cycle": 3,
+      "mode": "bootstrap"
+    },
+    "bias": "drift_offset_2",
+    "alpha": 1.02,
+    "timestamp_utc": "2025-09-17T22:42:37.281203Z",
+    "prev_hash": "31d3cbb9ee79d61378d3544f6b9d9bfccfbbdda0bc2c305ad8a0f71451ac8ca9",
+    "entry_hash": "5799cc8b7d202113e9ce66f23dd38daea699521c03c924a4ea970ea35a0a9d00"
+  },
+  {
+    "iteration": 4,
+    "fossil_tag": "REBOOT_START_004",
+    "codon_triad": [
+      "ATG",
+      "CCC",
+      "TTG"
+    ],
+    "anchor": {
+      "repo": "ZPE-1 Symbolic Drift",
+      "author": "Luis Ayala (Kp Kp)",
+      "file_anchor": "REPO ANCHOR.txt"
+    },
+    "operator": "Ω = (state + bias) × α",
+    "state": {
+      "cycle": 4,
+      "mode": "bootstrap"
+    },
+    "bias": "drift_offset_3",
+    "alpha": 1.03,
+    "timestamp_utc": "2025-09-17T22:42:37.281239Z",
+    "prev_hash": "5799cc8b7d202113e9ce66f23dd38daea699521c03c924a4ea970ea35a0a9d00",
+    "entry_hash": "9866eee13664d0537bacffeb716964a183f579431936931437d746ea5d0d43f0"
+  },
+  {
+    "iteration": 5,
+    "fossil_tag": "REBOOT_START_005",
+    "codon_triad": [
+      "ATG",
+      "CCC",
+      "TTG"
+    ],
+    "anchor": {
+      "repo": "ZPE-1 Symbolic Drift",
+      "author": "Luis Ayala (Kp Kp)",
+      "file_anchor": "REPO ANCHOR.txt"
+    },
+    "operator": "Ω = (state + bias) × α",
+    "state": {
+      "cycle": 5,
+      "mode": "bootstrap"
+    },
+    "bias": "drift_offset_4",
+    "alpha": 1.04,
+    "timestamp_utc": "2025-09-17T22:42:37.281272Z",
+    "prev_hash": "9866eee13664d0537bacffeb716964a183f579431936931437d746ea5d0d43f0",
+    "entry_hash": "b43f1c24c8478fbb1cd3a8b464b40f5dd125e0085a8ef83496288baa741aec29"
+  }
+]
