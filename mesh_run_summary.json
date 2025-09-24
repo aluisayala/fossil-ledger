@@ -1,0 +1,16 @@
+{
+  "run_id": "ophi_mesh_run_20250924T043815",
+  "timestamp_utc": "2025-09-24T04:38:15.946127Z",
+  "N_agents": 43,
+  "M_terms": 20000,
+  "S_point": 10.480728217229329,
+  "mean_agent": 0.24373786551696108,
+  "std_agent": 0.1701391769271564,
+  "phase_magnitude": 2.438451277447032,
+  "entropy_bits": 5.20357218518406,
+  "norm_entropy": 0.9589602462126338,
+  "coherence": 0.30195837004809245,
+  "se44_pass": false,
+  "C_min": 0.985,
+  "S_max": 0.01
+}
