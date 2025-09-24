@@ -1,0 +1,62 @@
+{
+  "fossil_tag": "gpu.false.drift.truth.savings.v1",
+  "codon_triad": [
+    "ATG",
+    "CCC",
+    "TTG"
+  ],
+  "timestamp_utc": "2025-09-24T00:54:32.848192+00:00",
+  "baseline_investment_usd": 100000000000,
+  "scenarios": [
+    {
+      "scenario": "Conservative (30%)",
+      "efficiency": 0.3,
+      "savings_usd": 30000000000.0
+    },
+    {
+      "scenario": "Moderate (50%)",
+      "efficiency": 0.5,
+      "savings_usd": 50000000000.0
+    },
+    {
+      "scenario": "Aggressive (70%)",
+      "efficiency": 0.7,
+      "savings_usd": 70000000000.0
+    },
+    {
+      "scenario": "Extreme (90%)",
+      "efficiency": 0.9,
+      "savings_usd": 90000000000.0
+    }
+  ],
+  "component_model": {
+    "weights_share_of_total": {
+      "Silicon & Systems (chips, interconnects)": 0.4,
+      "Data Center Build (facilities, racks)": 0.25,
+      "Energy & Cooling": 0.2,
+      "Ops & Software (training, orchestration)": 0.1,
+      "Compliance/Legal/Audit": 0.05
+    },
+    "assumed_reductions_fraction": {
+      "Silicon & Systems (chips, interconnects)": 0.7,
+      "Data Center Build (facilities, racks)": 0.6,
+      "Energy & Cooling": 0.8,
+      "Ops & Software (training, orchestration)": 0.5,
+      "Compliance/Legal/Audit": 0.9
+    }
+  },
+  "artifacts": {
+    "chart_png": {
+      "path": "/mnt/data/ophi_savings_chart.png",
+      "sha256": "b3e527d61df9bf8edbf41d597954726f7f59baa24b550da5ba5f49787ebeb228"
+    },
+    "components_csv": {
+      "path": "/mnt/data/ophi_savings_components.csv",
+      "sha256": "f0c69e64a2b51b869eab4fd02da5199cc9e80b9b0108258d696568a42111204f"
+    },
+    "brief_pdf": {
+      "path": "/mnt/data/ophi_savings_brief.pdf",
+      "sha256": "9052bec55e7e96d73fbe0a22d59b6491b341a7f97d8cc12179b179f51ba2b081"
+    }
+  }
+}
