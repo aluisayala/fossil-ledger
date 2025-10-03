@@ -1,0 +1,59 @@
+from datetime import datetime
+import hashlib
+import json
+
+# Define emission parameters for Ω_H₂O
+fossil_tag = "Ω_H₂O.node.001"
+codon_sequence = ["ATG", "CCC", "TTG"]
+glyphs = ["⧖⧖", "⧃⧃", "⧖⧊"]
+equation = "Ω = (state + bias) × α"
+
+# Inputs
+state = 997.0  # kg/m³ (water density at 25°C)
+bias = 3.6     # estimated hydrogen bonding bias
+alpha = 1.013  # thermal coherence amplification
+
+# Metrics
+coherence = 0.9992
+entropy = 0.0041
+rms_drift = 0.00005
+
+# Compute omega output
+omega_output = (state + bias) * alpha
+
+# Prepare fossil receipt
+fossil_receipt = {
+    "fossil_tag": fossil_tag,
+    "codon_sequence": codon_sequence,
+    "glyphs": glyphs,
+    "equation": equation,
+    "inputs": {
+        "state": state,
+        "bias": bias,
+        "alpha": alpha
+    },
+    "omega_output": omega_output,
+    "metrics": {
+        "C": coherence,
+        "S": entropy,
+        "RMS": rms_drift
+    },
+    "timestamp_utc": datetime.utcnow().isoformat() + "Z"
+}
+
+# Serialize and hash
+canonical_json = json.dumps(fossil_receipt, sort_keys=True, separators=(',', ':'), ensure_ascii=False)
+fossil_hash = hashlib.sha256(canonical_json.encode('utf-8')).hexdigest()
+fossil_receipt["sha256"] = fossil_hash
+
+fossil_receipt
+Result
+{'fossil_tag': 'Ω_H₂O.node.001',
+ 'codon_sequence': ['ATG', 'CCC', 'TTG'],
+ 'glyphs': ['⧖⧖', '⧃⧃', '⧖⧊'],
+ 'equation': 'Ω = (state + bias) × α',
+ 'inputs': {'state': 997.0, 'bias': 3.6, 'alpha': 1.013},
+ 'omega_output': 1013.6077999999999,
+ 'metrics': {'C': 0.9992, 'S': 0.0041, 'RMS': 5e-05},
+ 'timestamp_utc': '2025-10-03T03:38:26.018509Z',
+ 'sha256': 'bb6c45ad2ea79705c4feb960196234aa22b5065c10236ca7012f51df5bfd35b5'
