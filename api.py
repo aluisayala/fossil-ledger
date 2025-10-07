@@ -79,3 +79,9 @@ async def verify(req: Request):
             return {"valid": False, "message": "❌ SHA mismatch"}
     except Exception as e:
         return {"valid": False, "error": str(e)}
+        @app.post("/rehash")
+async def rehash(req: Request):
+    data = await req.json()
+    canonical = json.dumps(data, sort_keys=True, separators=(",", ":"), ensure_ascii=False)
+    return {"sha256": hashlib.sha256(canonical.encode()).hexdigest()}
+
