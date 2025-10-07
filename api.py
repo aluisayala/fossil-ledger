@@ -10,6 +10,7 @@ app = FastAPI(title="OPHI Fossil Miner Node")
 # 🌐 CORS: Restrict origins for production!
 ALLOWED_ORIGINS = [
     "https://fossil-chain.base44.app",
+    "http://localhost:5173",  # Added for local testing
     # Add any other trusted origins here
 ]
 app.add_middleware(
@@ -25,6 +26,7 @@ TSA_URL = "https://freetsa.org/tsr"
 def se44_valid(c, s):
     return c >= 0.985 and s <= 0.01
 
+
 class FossilizeRequest(BaseModel):
     codon_sequence: list[str] = Field(default_factory=list)
     state: float = 0.0
@@ -35,17 +37,22 @@ class FossilizeRequest(BaseModel):
     creator_pubkey: str = ""
     signature: str = ""
 
+
 class FossilVerifyRequest(BaseModel):
-    # Accepts arbitrary fields, but expects at least sha256 and maybe signature
     sha256: str
     signature: str = ""
-    # Accept extra fields
+    
     class Config:
         extra = "allow"
 
+
 @app.get("/")
 def home():
-    return {"status": "OPHI Miner Node active", "timestamp": datetime.utcnow().isoformat() + "Z"}
+    return {
+        "status": "OPHI Miner Node active", 
+        "timestamp": datetime.utcnow().isoformat() + "Z"
+    }
+
 
 @app.post("/fossilize")
 async def fossilize(req: Request):
@@ -53,10 +60,16 @@ async def fossilize(req: Request):
         data = await req.json()
         request = FossilizeRequest(**data)
     except (ValidationError, Exception) as e:
-        return JSONResponse(status_code=400, content={"error": "Invalid request body", "detail": str(e)})
+        return JSONResponse(
+            status_code=400, 
+            content={"error": "Invalid request body", "detail": str(e)}
+        )
 
     if not se44_valid(request.coherence, request.entropy):
-        return JSONResponse(status_code=400, content={"error": "SE44 Gate failed", "valid": False})
+        return JSONResponse(
+            status_code=400, 
+            content={"error": "SE44 Gate failed", "valid": False}
+        )
 
     glyph_map = {"ATG": "⧖⧖", "CCC": "⧃⧃", "TTG": "⧖⧊"}
     glyphs = [glyph_map.get(c, "?") for c in request.codon_sequence]
@@ -79,11 +92,12 @@ async def fossilize(req: Request):
 
     try:
         tsa = requests.post(TSA_URL, data=fossil["sha256"].encode(), timeout=5)
-        fossil["timestamp_rfc3161"] = tsa.headers.get("Date", datetime.utcnow().isoformat()+"Z")
+        fossil["timestamp_rfc3161"] = tsa.headers.get("Date", datetime.utcnow().isoformat() + "Z")
     except Exception:
-        fossil["timestamp_rfc3161"] = datetime.utcnow().isoformat()+"Z"
+        fossil["timestamp_rfc3161"] = datetime.utcnow().isoformat() + "Z"
 
     return {"fossil": fossil, "valid": True}
+
 
 @app.post("/verify")
 async def verify(req: Request):
@@ -91,12 +105,17 @@ async def verify(req: Request):
         data = await req.json()
         request = FossilVerifyRequest(**data)
     except (ValidationError, Exception) as e:
-        return JSONResponse(status_code=400, content={"valid": False, "error": "Invalid request body", "detail": str(e)})
+        return JSONResponse(
+            status_code=400, 
+            content={"valid": False, "error": "Invalid request body", "detail": str(e)}
+        )
 
     try:
         canonical = json.dumps(
             {k: v for k, v in data.items() if k not in ("sha256", "signature")},
-            sort_keys=True, separators=(",", ":"), ensure_ascii=False
+            sort_keys=True, 
+            separators=(",", ":"), 
+            ensure_ascii=False
         )
         sha = hashlib.sha256(canonical.encode()).hexdigest()
         if sha == data.get("sha256"):
@@ -104,13 +123,21 @@ async def verify(req: Request):
         else:
             return {"valid": False, "message": "❌ SHA mismatch"}
     except Exception as e:
-        return JSONResponse(status_code=500, content={"valid": False, "error": str(e)})
+        return JSONResponse(
+            status_code=500, 
+            content={"valid": False, "error": str(e)}
+        )
+
 
 @app.post("/rehash")
 async def rehash(req: Request):
     try:
         data = await req.json()
     except Exception as e:
-        return JSONResponse(status_code=400, content={"error": "Invalid JSON", "detail": str(e)})
+        return JSONResponse(
+            status_code=400, 
+            content={"error": "Invalid JSON", "detail": str(e)}
+        )
+    
     canonical = json.dumps(data, sort_keys=True, separators=(",", ":"), ensure_ascii=False)
     return {"sha256": hashlib.sha256(canonical.encode()).hexdigest()}
