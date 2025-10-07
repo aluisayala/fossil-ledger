@@ -1,8 +1,18 @@
 from fastapi import FastAPI, Request
+from fastapi.middleware.cors import CORSMiddleware  # 👈 add this
 from datetime import datetime
 import hashlib, json, requests
 
 app = FastAPI(title="OPHI Fossil Miner Node")
+
+# 🔓 Allow Base44 and browsers to connect safely
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],       # You can restrict to ["https://fossil-chain.base44.app"] later
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 TSA_URL = "https://freetsa.org/tsr"
 
