@@ -1,31 +1,36 @@
 # OPHI Proof-of-Fossilization Node (Render Edition)
 
-This node provides a public API for creating and verifying SE44-gated symbolic fossils.
+This node provides a **public FastAPI backend** for creating and verifying SE44-gated symbolic fossils — the core of the OPHI Proof-of-Fossilization (PoF) protocol.
 
-## Endpoints
-- `GET /` → Health check
-- `POST /fossilize` → Create fossil (JSON payload)
-- `POST /verify` → Verify SHA-256 integrity
+---
 
-Each fossil includes:
-- SE44 validation (C ≥ 0.985, S ≤ 0.01)
-- Real SHA-256 hash
-- RFC-3161 timestamp
-- ECDSA signature + public key (passed in from frontend)
+## 🚀 Endpoints
 
-## Deploy on Render
-1. Create a new **Web Service**
-2. Connect this folder’s repo
-3. Build Command:
+| Method | Route | Description |
+|:-------|:------|:-------------|
+| `GET /` | Health check / status |
+| `POST /fossilize` | Create a fossil (JSON payload) |
+| `POST /verify` | Verify SHA-256 integrity |
+| `POST /rehash` | Recompute SHA-256 from any JSON body |
+
+---
+
+## 🧬 Fossil Data Includes
+
+- ✅ **SE44 validation:** Coherence ≥ 0.985, Entropy ≤ 0.01  
+- 🔒 **Canonical SHA-256 hash** of full fossil payload  
+- ⏱ **RFC-3161 timestamp** (falls back to local UTC if TSA unavailable)  
+- 🧾 **ECDSA signature + public key** (forwarded from frontend)  
+- 🧠 **Symbolic codon→glyph mapping** (ATG → ⧖⧖, CCC → ⧃⧃, TTG → ⧖⧊, etc.)
+
+---
+
+## ⚙️ Deployment on Render
+
+1. **Create a new Web Service**
+2. Connect your GitHub repository (the one containing `api.py` and `requirements.txt`)
+3. **Environment:**
+   - Runtime: **Python 3**
+4. **Build Command:**
+   ```bash
    pip install -r requirements.txt
-4. Start Command:
-   uvicorn api:app --host 0.0.0.0 --port 10000
-5. Deploy → You’ll get a live URL:
-   https://ophi-miner-node.onrender.com
-
-## Example Test
-```bash
-curl -X POST https://ophi-miner-node.onrender.com/fossilize \
--H "Content-Type: application/json" \
--d '{"codon_sequence":["ATG","CCC","TTG"],"state":0.5,"bias":0.2,"alpha":1.25,"coherence":0.99,"entropy":0.005,"creator_pubkey":"demo","signature":"demo"}'
-```
