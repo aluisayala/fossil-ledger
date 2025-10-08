@@ -7,11 +7,13 @@ import hashlib, json, requests
 
 app = FastAPI(title="OPHI Fossil Miner Node")
 
-# 🌐 CORS — allow Base44 & local dev
+# 🌐 CORS — allow Base44 (prod + preview) & local dev
 ALLOWED_ORIGINS = [
-    "https://fossil-chain.base44.app",
-    "http://localhost:5173"
+    "https://fossil-chain.base44.app",                  # main live app
+    "https://preview--fossil-chain-c9a2ea5a.base44.app",  # Base44 preview build
+    "http://localhost:5173"                             # local testing
 ]
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=ALLOWED_ORIGINS,
