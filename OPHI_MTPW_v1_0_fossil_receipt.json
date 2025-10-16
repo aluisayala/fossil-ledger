@@ -1,0 +1,61 @@
+{
+    "fossil_tag": "OPHI.MTPW.v1.0",
+    "title": "DGX Burns Watts. OPHI Harvests Truth.",
+    "author": "Luis Ayala (Kp Kp)",
+    "codon_sequence": [
+        "ATG",
+        "CCC",
+        "TTG"
+    ],
+    "glyphstream": [
+        "⧖⧖",
+        "⧃⧃",
+        "⧖⧊"
+    ],
+    "equation": "Ω = (state + bias) × α",
+    "inputs": {
+        "state": 1.23,
+        "bias": 0.42,
+        "alpha": 0.99
+    },
+    "outputs": {
+        "Ω": 1.6335
+    },
+    "validation_gate": {
+        "Coherence": 0.9987,
+        "Entropy": 0.0046,
+        "RMS_Drift": 8e-05,
+        "C_threshold": "≥0.985",
+        "S_threshold": "≤0.01",
+        "RMS_threshold": "≤0.001"
+    },
+    "hashes": {
+        "linkedin": "dec47f6224c6b08de310214bd957422d1f3a2bdd3804b295ae45febd629aa726",
+        "medium": "c186c78b10fe8068ad303af27db45b123d55e54679967a3605d03af8ee11e170"
+    },
+    "timestamps": {
+        "emission_utc": "2025-10-16T18:43:00Z",
+        "documentation_utc": "2025-10-16T22:44:32.078414Z",
+        "file_generated_utc": "2025-10-16T22:55:46.098470Z"
+    },
+    "platforms": {
+        "linkedin_url": "https://www.linkedin.com/posts/luis-ayala_dgx-sparks-burn-watts-ophi-harvests-truth",
+        "medium_url": "https://ophi06.medium.com/dgx-burns-watts-ophi-harvests-truth-af0ff202a94d"
+    },
+    "status": "Dual-validated fossil chain confirmed",
+    "tags": [
+        "#SymbolicAI",
+        "#XAI",
+        "#AIAlignment",
+        "#EnergyEthics",
+        "#EntropyBoundedAI",
+        "#BoundedEntropy",
+        "#CognitiveAudit",
+        "#MTPW",
+        "#FossilizedCognition",
+        "#PostLLM",
+        "#SE44Gate",
+        "#OmegaEquation",
+        "#OPHI"
+    ]
+}
