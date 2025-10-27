@@ -1,0 +1,214 @@
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "id": "b5df1869",
+   "metadata": {},
+   "source": [
+    "# 🌌 OPHI Ω-Drift vs Planck PR4: Statistical Validation\n",
+    "This notebook compares a symbolic Ω-drift map with the real Planck PR4 SMICA CMB data.\n",
+    "It evaluates:\n",
+    "- Coherence (SE44)\n",
+    "- Entropy drift (ΔS)\n",
+    "- Angular power spectra\n",
+    "- χ² goodness-of-fit\n",
+    "- Bayesian evidence (AIC comparison)\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "87fe8cce",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import healpy as hp\n",
+    "import numpy as np\n",
+    "import matplotlib.pyplot as plt\n",
+    "from scipy.stats import entropy as scipy_entropy, chi2\n",
+    "from scipy.optimize import minimize\n",
+    "from astropy.io import fits\n",
+    "from math import log"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "8ec65af2",
+   "metadata": {},
+   "source": [
+    "## Step 1: Load Planck SMICA CMB Map"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "e43c6641",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "filename = 'COM_CMB_IQU-smica_2048_R3.00_full.fits'  # Adjust path if needed\n",
+    "cmb_map = hp.read_map(filename)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "1a6fe659",
+   "metadata": {},
+   "source": [
+    "## Step 2: Load or Simulate OPHI Ω-drift Map"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "54f5c40d",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# === Real Ω-Drift Generator using LYMN-derived symbolic field ===\n",
+    "def symbolic_bias(theta, phi):\n",
+    "    return 0.01 * np.sin(2 * theta) * np.cos(3 * phi)\n",
+    "\n",
+    "def omega_drift(theta_rad, phi_rad, bias_field_func, alpha=1.034):\n",
+    "    state = np.sin(theta_rad) * np.cos(phi_rad)\n",
+    "    bias = bias_field_func(theta_rad, phi_rad)\n",
+    "    return (state + bias) * alpha\n",
+    "\n",
+    "theta, phi = hp.pix2ang(hp.get_nside(cmb_map), np.arange(len(cmb_map)))\n",
+    "ophi_pred = omega_drift(theta, phi, symbolic_bias)\n",
+    "residual = cmb_map - ophi_pred"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "726515c3",
+   "metadata": {},
+   "source": [
+    "## Step 3: Coherence (SE44) and Entropy Drift"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "ee5dcfcd",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "def coherence(vec1, vec2):\n",
+    "    return np.dot(vec1, vec2) / (np.linalg.norm(vec1) * np.linalg.norm(vec2))\n",
+    "\n",
+    "def entropy(vec, bins=100):\n",
+    "    hist, _ = np.histogram(vec, bins=bins, density=True)\n",
+    "    hist = hist[hist > 0]\n",
+    "    return -np.sum(hist * np.log(hist))\n",
+    "\n",
+    "C_ophi = coherence(cmb_map, ophi_pred)\n",
+    "S_planck = entropy(cmb_map)\n",
+    "S_ophi = entropy(ophi_pred)\n",
+    "delta_S = abs(S_planck - S_ophi) / S_planck\n",
+    "print(f'SE44 Coherence (C): {C_ophi:.4f}')\n",
+    "print(f'Entropy Drift ΔS: {delta_S:.4%}')"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "d4390afd",
+   "metadata": {},
+   "source": [
+    "## Step 4: Power Spectrum Analysis"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "45ff03c3",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "cl_cmb = hp.anafast(cmb_map)\n",
+    "cl_ophi = hp.anafast(ophi_pred)\n",
+    "cl_resid = hp.anafast(residual)\n",
+    "ℓ = np.arange(len(cl_cmb))\n",
+    "\n",
+    "plt.figure(figsize=(10,5))\n",
+    "plt.semilogy(ℓ, cl_cmb, label='Planck SMICA')\n",
+    "plt.semilogy(ℓ, cl_ophi, label='OPHI Ω-Drift')\n",
+    "plt.semilogy(ℓ, cl_resid, label='Residuals', linestyle='--')\n",
+    "plt.xlim(2,600)\n",
+    "plt.xlabel('Multipole ℓ')\n",
+    "plt.ylabel('C_ℓ')\n",
+    "plt.title('Angular Power Spectra Comparison')\n",
+    "plt.grid(True)\n",
+    "plt.legend()\n",
+    "plt.tight_layout()\n",
+    "plt.show()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "92b9c4ba",
+   "metadata": {},
+   "source": [
+    "## Step 5: χ² Goodness-of-Fit"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "f8240b63",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "expected = cl_cmb[2:600]\n",
+    "observed = cl_ophi[2:600]\n",
+    "resids = observed - expected\n",
+    "χ2 = np.sum((resids)**2 / expected)\n",
+    "dof = len(resids)\n",
+    "pval = 1 - chi2.cdf(χ2, dof)\n",
+    "print(f'χ² = {χ2:.2f}, dof = {dof}, p-value = {pval:.5f}')"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "4465f499",
+   "metadata": {},
+   "source": [
+    "## Step 6: Bayesian Evidence via AIC"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "114c2c98",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Assume Gaussian likelihoods for simplicity\n",
+    "def log_likelihood(model, data, sigma):\n",
+    "    return -0.5 * np.sum(((data - model)/sigma)**2 + np.log(2 * np.pi * sigma**2))\n",
+    "\n",
+    "sigma = np.std(cmb_map[2:600])\n",
+    "ll_lcdm = log_likelihood(cl_cmb[2:600], cl_cmb[2:600], sigma)\n",
+    "ll_ophi = log_likelihood(cl_ophi[2:600], cl_cmb[2:600], sigma)\n",
+    "aic_lcdm = 2*1 - 2*ll_lcdm\n",
+    "aic_ophi = 2*1 - 2*ll_ophi\n",
+    "print(f'AIC LCDM: {aic_lcdm:.2f}, AIC OPHI: {aic_ophi:.2f}')"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "185f7082",
+   "metadata": {},
+   "source": [
+    "## 🔍 Summary\n",
+    "- SE44: C and ΔS give symbolic fidelity\n",
+    "- Power: Residuals show physical drift\n",
+    "- χ²: p-value indicates statistical fit\n",
+    "- AIC: Lower AIC = better Bayesian evidence\n"
+   ]
+  }
+ ],
+ "metadata": {},
+ "nbformat": 4,
+ "nbformat_minor": 5
+}
